@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -14,6 +15,12 @@ app.use(express.json());
 //Handlebars
 app.engine('handlebars', handlebars( { defaultLayout: 'main' } ) );
 app.set('view engine', 'handlebars')
+
+//Public
+// como colquei os codigos fontes dentro de src, 
+// é necessário subir nivel na pasta pra poder acessar 'public'
+const publicPath = path.join(__dirname, '../public') 
+app.use(express.static(publicPath));
 
 //Rotas
 app.use('/admin', router);
